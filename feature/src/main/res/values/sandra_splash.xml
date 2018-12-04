@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="splashbackcolor">
+        <item name="android:background" >#DE3B6A</item>
+    </style>
+</resources>
