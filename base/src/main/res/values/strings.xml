@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EMC Digital</string>
+    <string name="title_activity_main">activity_main</string>
+    <string name="title_activity_login">Acceder</string>
 </resources>

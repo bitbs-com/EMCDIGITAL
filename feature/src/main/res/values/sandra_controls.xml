@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="editview">
+        <item name="android:background">#F289A7</item>
+        <item name="android:textColor">#F9F9F9</item>
+        <item name="android:bottomLeftRadius">100dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
