@@ -45,7 +45,6 @@
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/imgSplashBottom"
                 android:layout_marginTop="32dp">
 
             <android.support.design.widget.TextInputLayout
@@ -60,13 +59,15 @@
                         android:hint="@string/prompt_email"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        style="@style/textview"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    style="@style/editview">
 
                 <EditText
                         android:id="@+id/password"
@@ -78,28 +79,22 @@
                         android:imeOptions="actionUnspecified"
                         android:inputType="textPassword"
                         android:maxLines="1"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:fontFamily="@font/rubik_500italic"
+                        style="@style/textview"/>
 
             </android.support.design.widget.TextInputLayout>
 
             <Button
                     android:id="@+id/email_sign_in_button"
-                    style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    style="@style/button"/>
 
         </LinearLayout>
 
-        <ImageView
-                android:id="@+id/imgSplashBottom"
-                app:srcCompat="@drawable/splashbottom"
-                style="@style/splashbottomimg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

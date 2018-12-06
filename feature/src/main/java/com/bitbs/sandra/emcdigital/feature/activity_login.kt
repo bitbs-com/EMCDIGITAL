@@ -23,8 +23,12 @@ import android.widget.TextView
 
 import java.util.ArrayList
 import android.Manifest.permission.READ_CONTACTS
+import android.widget.Toast
+
+
 
 import kotlinx.android.synthetic.main.activity_login.*
+import lisa.bitbs.tools.lisaws
 
 /**
  * A activity_login screen that offers activity_login via email/password.
@@ -38,6 +42,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         // Set up the activity_login form.
         populateAutoComplete()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -108,6 +113,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
         // Store values at the time of the activity_login attempt.
         val emailStr = email.text.toString()
         val passwordStr = password.text.toString()
+
 
         var cancel = false
         var focusView: View? = null
@@ -253,10 +259,16 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
     inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
         AsyncTask<Void, Void, Boolean>() {
 
+        var msg = ""
+
         override fun doInBackground(vararg params: Void): Boolean? {
             // TODO: attempt authentication against a network service.
 
-            try {
+            msg = lisaws().executeSQLtoJSON("EXECUTE SQL");
+
+
+            return true
+           /* try {
                 // Simulate network access.
                 Thread.sleep(2000)
             } catch (e: InterruptedException) {
@@ -270,7 +282,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     // Account exists, return true if the password matches.
                     it[1] == mPassword
                 }
-                ?: true
+                ?: true*/
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -278,6 +290,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
             showProgress(false)
 
             if (success!!) {
+                Toast.makeText( applicationContext, msg, Toast.LENGTH_LONG ).show()
                 finish()
             } else {
                 password.error = getString(R.string.error_incorrect_password)
@@ -303,5 +316,6 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
          * TODO: remove after connecting to a real authentication system.
          */
         private val DUMMY_CREDENTIALS = arrayOf("foo@example.com:hello", "bar@example.com:world")
+
     }
 }
