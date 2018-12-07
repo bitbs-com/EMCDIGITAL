@@ -1,5 +1,6 @@
 package com.bitbs.sandra.emcdigital.feature
 
+import android.Manifest.permission.INTERNET
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
@@ -11,7 +12,6 @@ import android.content.CursorLoader
 import android.content.Loader
 import android.database.Cursor
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -28,16 +28,20 @@ import android.widget.Toast
 
 
 import kotlinx.android.synthetic.main.activity_login.*
+import lisa.bitbs.tools.lisadbproc
 import lisa.bitbs.tools.lisaws
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.lang.Exception
 
 /**
  * A activity_login screen that offers activity_login via email/password.
  */
 class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
-    /**
+   /* *//**
      * Keep track of the activity_login task to ensure we can cancel it if requested.
-     */
-    private var mAuthTask: UserLoginTask? = null
+     *//*
+    private var mAuthTask: UserLoginTask? = null*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +49,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
         // Set up the activity_login form.
         populateAutoComplete()
+        allowInternet()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
                 attemptLogin()
@@ -62,6 +67,24 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
         }
 
         loaderManager.initLoader(0, null, this)
+    }
+
+    private fun allowInternet() : Boolean
+    {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true
+        }
+        if (checkSelfPermission(INTERNET) == PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        if (shouldShowRequestPermissionRationale(INTERNET)) {
+            Snackbar.make(email, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+                .setAction(android.R.string.ok,
+                    { requestPermissions(arrayOf(INTERNET), ) })
+        } else {
+            requestPermissions(arrayOf(READ_CONTACTS), REQUEST_READ_CONTACTS)
+        }
+        return false
     }
 
     private fun mayRequestContacts(): Boolean {
@@ -102,9 +125,9 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual activity_login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuthTask != null) {
+        /*if (mAuthTask != null) {
             return
-        }
+        }*/
 
         // Reset errors.
         email.error = null
@@ -144,9 +167,31 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
             // Show a progress spinner, and kick off a background task to
             // perform the user activity_login attempt.
             showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
+            UserLoginTask(emailStr, passwordStr)
         }
+    }
+
+    private fun UserLoginTask(nickname: String, password: String){
+        try {
+                doAsync {
+                    var json= lisadbproc().sp_ERP_SEC_User_Login_Check(
+                                    iCompanyId = 1031,
+                                    sNickName = nickname,
+                                    sPassword = password)
+
+
+                    uiThread {
+                        loginResult(json);
+                    }
+            }
+        } catch (e: Exception) {
+            Toast.makeText(baseContext, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun loginResult(json: String)
+    {
+
     }
 
     private fun isEmailValid(email: String): Boolean {
@@ -256,7 +301,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Represents an asynchronous activity_login/registration task used to authenticate
      * the user.
      */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
+    /*inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) :
         AsyncTask<Void, Void, Boolean>() {
 
         var msg = ""
@@ -268,7 +313,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
 
             return true
-           /* try {
+           *//* try {
                 // Simulate network access.
                 Thread.sleep(2000)
             } catch (e: InterruptedException) {
@@ -282,7 +327,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
                     // Account exists, return true if the password matches.
                     it[1] == mPassword
                 }
-                ?: true*/
+                ?: true*//*
         }
 
         override fun onPostExecute(success: Boolean?) {
@@ -303,7 +348,7 @@ class activity_login : AppCompatActivity(), LoaderCallbacks<Cursor> {
             showProgress(false)
         }
     }
-
+*/
     companion object {
 
         /**
