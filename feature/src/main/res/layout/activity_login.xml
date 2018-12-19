@@ -60,7 +60,8 @@
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:singleLine="true"
-                        style="@style/textview"/>
+                        style="@style/textview"
+                        android:nextFocusDown="@+id/password"/>
 
             </android.support.design.widget.TextInputLayout>
 
