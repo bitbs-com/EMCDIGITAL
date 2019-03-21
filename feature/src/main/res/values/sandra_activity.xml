@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="sandra_activity">
+        <item name="android:background">#F2D4DD</item>
+    </style>
+</resources>
