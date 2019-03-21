@@ -5,12 +5,44 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity_splash" style="@style/splashbackcolor">
+        tools:context=".activity_splash"
+        style="@style/splashbackcolor">
+
 
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="100dp" app:srcCompat="@drawable/splashbottom"
-            android:id="@+id/splashBottom"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:scaleType="fitXY"/>
+            app:srcCompat="@drawable/logomcdelacruz"
+            android:id="@+id/imgSplashLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/splashlogo"/>
+
+
+
+    <ImageView
+            app:srcCompat="@drawable/splashtitle"
+            android:id="@+id/imgSplashTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintBottom_toTopOf="@+id/imgSplashBottom"
+            app:layout_constraintTop_toBottomOf="@+id/imgSplashLogo"
+            app:layout_constraintVertical_bias="0.0"
+            style="@style/splashtitleimg"/>
+
+
+    <ImageView
+            android:id="@+id/imgSplashBottom"
+            app:srcCompat="@drawable/splashbottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/splashbottomimg"/>
+
+    <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline"
+            app:layout_constraintGuide_begin="205dp"
+            android:orientation="vertical"/>
 </android.support.constraint.ConstraintLayout>
