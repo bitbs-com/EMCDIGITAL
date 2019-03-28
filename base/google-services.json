@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "206026852784",
+    "firebase_url": "https://bbs-auth.firebaseio.com",
+    "project_id": "bbs-auth",
+    "storage_bucket": "bbs-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206026852784:android:3fbf460613d8e198",
+        "android_client_info": {
+          "package_name": "com.bitbs.sandra.emcdigital.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206026852784-i9jkjl3dal29ii4tcs02o4758eqe2f11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitbs.sandra.emcdigital.app",
+            "certificate_hash": "ff1a76b1da803ca3d98c403d19c91b66edb484ed"
+          }
+        },
+        {
+          "client_id": "206026852784-q7ge73bdbh5eh1icuira0o8jjo9tnp32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8yG5PjbPmoR55tFMmQAxzxi0Zl9ZrJE4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206026852784-q7ge73bdbh5eh1icuira0o8jjo9tnp32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
